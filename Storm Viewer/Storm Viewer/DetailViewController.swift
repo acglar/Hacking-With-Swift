@@ -14,11 +14,26 @@ class DetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        if let fileName = imagePath {
+            title = (fileName as NSString).deletingPathExtension
+        }
+
+        navigationItem.largeTitleDisplayMode = .never
+
         if let imageToLoad = imagePath {
             imageView.image = UIImage(named: imageToLoad)
         }
     }
-    
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.hidesBarsOnTap = true
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        navigationController?.hidesBarsOnTap = false
+    }
 
     /*
     // MARK: - Navigation
