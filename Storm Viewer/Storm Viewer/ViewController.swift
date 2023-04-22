@@ -24,6 +24,8 @@ class ViewController: UITableViewController {
             if !item.hasPrefix("nssl") { continue }
             picturePaths.append(item)
         }
+
+        picturePaths.sort()
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
