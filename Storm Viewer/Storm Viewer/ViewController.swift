@@ -21,10 +21,16 @@ class ViewController: UITableViewController {
             if !item.hasPrefix("nssl") { continue }
             picturePaths.append(item)
         }
-        
-        print(picturePaths)
     }
 
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return picturePaths.count
+    }
 
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Picture", for: indexPath)
+        cell.textLabel?.text = picturePaths[indexPath.row]
+        return cell
+    }
 }
 
