@@ -32,5 +32,13 @@ class ViewController: UITableViewController {
         cell.textLabel?.text = picturePaths[indexPath.row]
         return cell
     }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if let detailViewController = storyboard?.instantiateViewController(withIdentifier: "Detail")
+            as? DetailViewController {
+            detailViewController.imagePath = picturePaths[indexPath.row]
+            navigationController?.pushViewController(detailViewController, animated: true)
+        }
+    }
 }
 

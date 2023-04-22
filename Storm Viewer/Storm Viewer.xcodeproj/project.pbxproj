@@ -81,12 +81,12 @@
 				BD98BA4729F42379004F3702 /* AppDelegate.swift */,
 				BD98BA4929F42379004F3702 /* SceneDelegate.swift */,
 				BD98BA4B29F42379004F3702 /* ViewController.swift */,
+				BD98BA7029F452E5004F3702 /* DetailViewController.swift */,
 				BD98BA4D29F42379004F3702 /* Main.storyboard */,
 				BD98BA5029F4237A004F3702 /* Assets.xcassets */,
 				BD98BA5229F4237A004F3702 /* LaunchScreen.storyboard */,
 				BD98BA5529F4237A004F3702 /* Info.plist */,
 				BD98BA5B29F427BD004F3702 /* Content */,
-				BD98BA7029F452E5004F3702 /* DetailViewController.swift */,
 			);
 			path = "Storm Viewer";
 			sourceTree = "<group>";

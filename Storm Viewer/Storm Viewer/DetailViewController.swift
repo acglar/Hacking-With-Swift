@@ -9,11 +9,14 @@ import UIKit
 
 class DetailViewController: UIViewController {
     @IBOutlet var imageView: UIImageView!
+    var imagePath: String?
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        if let imageToLoad = imagePath {
+            imageView.image = UIImage(named: imageToLoad)
+        }
     }
     
 
