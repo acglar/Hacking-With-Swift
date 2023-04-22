@@ -10,11 +10,14 @@ import UIKit
 class DetailViewController: UIViewController {
     @IBOutlet var imageView: UIImageView!
     var imagePath: String?
+    var imageName: String?
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        if let fileName = imagePath {
+        if let name = imageName {
+            title = name
+        } else if let fileName = imagePath {
             title = (fileName as NSString).deletingPathExtension
         }
 
