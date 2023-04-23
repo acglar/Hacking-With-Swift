@@ -48,11 +48,13 @@ class ViewController: UIViewController {
         secondButton.setImage(UIImage(named: availableCountries[1]), for: .normal)
         thirdButton.setImage(UIImage(named: availableCountries[2]), for: .normal)
         
-        title = availableCountries[correctAnswer].uppercased()
+        let question = availableCountries[correctAnswer]
+        let playerScore = "Score: \(score)"
+        title = ("\(question) \(playerScore)").uppercased()
     }
     
     @IBAction func buttonTapped(_ sender: UIButton) {
-        var title = sender.tag == correctAnswer ? "Correct" : "Wrong"
+        let title = sender.tag == correctAnswer ? "Correct" : "Wrong"
         score += sender.tag == correctAnswer ? 1 : -1
         
         let alertController = UIAlertController(title: title, message: "Your score is \(score)", preferredStyle: .alert)
