@@ -56,8 +56,10 @@ class ViewController: UIViewController {
     @IBAction func buttonTapped(_ sender: UIButton) {
         let title = sender.tag == correctAnswer ? "Correct" : "Wrong"
         score += sender.tag == correctAnswer ? 1 : -1
+        let scoreMessage = "Your score is \(score)"
+        let messageToShow = sender.tag == correctAnswer ? scoreMessage : "You choose the \(availableCountries[sender.tag].uppercased()) Flag.\n\(scoreMessage)"
         
-        let alertController = UIAlertController(title: title, message: "Your score is \(score)", preferredStyle: .alert)
+        let alertController = UIAlertController(title: title, message: messageToShow, preferredStyle: .alert)
         
         alertController.addAction(UIAlertAction(title: "Continue", style: .default, handler: askQuestion))
         
