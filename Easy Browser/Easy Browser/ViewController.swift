@@ -11,6 +11,7 @@ import WebKit
 class ViewController: UIViewController, WKNavigationDelegate {
     var webView: WKWebView!
     var progressView: UIProgressView!
+    let websites: [String] = ["apple.com", "hackingwithswift.com"]
 
     internal override func loadView() {
         webView = WKWebView()
@@ -21,7 +22,7 @@ class ViewController: UIViewController, WKNavigationDelegate {
     internal override func viewDidLoad() {
         super.viewDidLoad()
         
-        let url = URL(string: "https://www.hackingwithswift.com")!
+        let url = URL(string: "https://www.\(websites[1])")!
         webView.load(URLRequest(url: url))
         webView.allowsBackForwardNavigationGestures = true
         
@@ -44,11 +45,11 @@ class ViewController: UIViewController, WKNavigationDelegate {
     @objc private func onRightBarButtonTapped() {
         let alertController = UIAlertController(title: "Open Page...", message: nil, preferredStyle: .actionSheet)
         alertController.addAction(UIAlertAction(title: "apple", style: .default, handler: {_ in
-            self.openPage(url: "apple.com")
+            self.openPage(url: self.websites[0])
         }))
 
         alertController.addAction(UIAlertAction(title: "hackingwithswift", style: .default, handler: {_ in
-            self.openPage(url: "hackingwithswift.com")
+            self.openPage(url: self.websites[1])
         }))
 
         alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel))
@@ -65,6 +66,17 @@ class ViewController: UIViewController, WKNavigationDelegate {
 
     internal func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         title = webView.title
+    }
+    
+    internal func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
+        let url = navigationAction.request.url
+        guard let host = url?.host else {
+            decisionHandler(.cancel)
+            return
+        }
+        
+        let result = websites.filter { host.contains($0) }
+        decisionHandler(result.isEmpty ? .cancel : .allow)
     }
     
     internal override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
