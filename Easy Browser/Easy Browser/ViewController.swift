@@ -77,6 +77,12 @@ class ViewController: UIViewController, WKNavigationDelegate {
         
         let result = websites.filter { host.contains($0) }
         decisionHandler(result.isEmpty ? .cancel : .allow)
+        
+        if result.isEmpty {
+            let alertController = UIAlertController(title: "Blocked", message: "Website you're trying reach is not allowed.", preferredStyle: .alert)
+            alertController.addAction(UIAlertAction(title: "OK", style: .cancel))
+            present(alertController, animated: true)
+        }
     }
     
     internal override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
