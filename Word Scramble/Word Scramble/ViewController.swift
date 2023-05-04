@@ -60,11 +60,21 @@ class ViewController: UITableViewController {
         }
     }
     
+    private func showErrorMessage(errorTitle: String, errorMessage: String) {
+        let alertController = UIAlertController(title: errorTitle, message: errorMessage, preferredStyle: .alert)
+        alertController.addAction(UIAlertAction(title: "Ok", style: .default))
+        present(alertController, animated: true)
+    }
+    
     private func isValid(word: String) -> Bool {
         return isPossible(word: word) && isOriginal(word: word) && isReal(word: word)
     }
     
     private func isOriginal(word: String) -> Bool {
+        if usedWords.contains(word) {
+            showErrorMessage(errorTitle: "Word used already", errorMessage: "Try another")
+        }
+
         return !usedWords.contains(word)
     }
     
@@ -75,6 +85,8 @@ class ViewController: UITableViewController {
             if let index = anagramWord.firstIndex(of: letter) {
                 anagramWord.remove(at: index)
             } else {
+                guard let title = title?.lowercased() else { return false }
+                showErrorMessage(errorTitle: "That's not anagram", errorMessage: "You can't create that word from \(title)")
                 return false
             }
         }
@@ -86,6 +98,10 @@ class ViewController: UITableViewController {
         let checker = UITextChecker()
         let range = NSRange(location: 0, length: word.utf16.count)
         let misspelledRange = checker.rangeOfMisspelledWord(in: word, range: range, startingAt: 0, wrap: false, language: "en")
+        
+        if misspelledRange.location != NSNotFound {
+            showErrorMessage(errorTitle: "Word couldn't recognised", errorMessage: "There's no such word")
+        }
 
         return misspelledRange.location == NSNotFound
     }
