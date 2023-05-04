@@ -82,6 +82,11 @@ class ViewController: UITableViewController {
     private func isPossible(word: String) -> Bool {
         guard var anagramWord = title?.lowercased() else { return false }
         
+        if word.count <= 3 {
+            showErrorMessage(errorTitle: "Too short", errorMessage: "Word needs to be at least 4 letter")
+            return false
+        }
+        
         for letter in word {
             if let index = anagramWord.firstIndex(of: letter) {
                 anagramWord.remove(at: index)
