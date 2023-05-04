@@ -22,6 +22,7 @@ class ViewController: UITableViewController {
         startGame()
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(promptForAnswer))
+        navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .refresh, target: self, action: #selector(startGame))
     }
     
     internal override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -106,7 +107,7 @@ class ViewController: UITableViewController {
         return misspelledRange.location == NSNotFound
     }
     
-    private func startGame() {
+    @objc private func startGame() {
         usedWords.removeAll(keepingCapacity: true)
         tableView.reloadData()
         title = allWords.randomElement()
