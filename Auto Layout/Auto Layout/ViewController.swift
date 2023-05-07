@@ -32,8 +32,8 @@ class ViewController: UIViewController {
             view.addSubview(label)
             //viewsDictionary["label\(i)"] = label
             
-            label.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
-            label.heightAnchor.constraint(equalToConstant: 80).isActive = true
+            label.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor).isActive = true
+            label.heightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.heightAnchor, multiplier: 0.2).isActive = true
             
             if let previous = previousLabel {
                 label.topAnchor.constraint(equalTo: previous.bottomAnchor, constant: 10).isActive = true
