@@ -20,6 +20,8 @@ class ViewController: UITableViewController {
         } else {
             urlString = "https://www.hackingwithswift.com/samples/petitions-2.json"
         }
+        
+        tryParseData()
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -42,12 +44,29 @@ class ViewController: UITableViewController {
         navigationController?.pushViewController(detailController, animated: true)
     }
     
+    private func tryParseData() {
+        if let url = URL(string: urlString) {
+            if let data = try? Data(contentsOf: url) {
+                parse(json: data)
+                return
+            }
+        }
+        
+        showError()
+    }
+    
     private func parse(json data: Data) {
         let decoder = JSONDecoder()
         
         guard let jsonData = try? decoder.decode(Petitions.self, from: data) else { return }
         petitions = jsonData.results
         tableView.reloadData()
+    }
+    
+    private func showError() {
+        let alertController = UIAlertController(title: "No Connection", message: "Check your network connection", preferredStyle: .alert)
+        alertController.addAction(UIAlertAction(title: "Ok", style: .default))
+        present(alertController, animated: true)
     }
 
 
