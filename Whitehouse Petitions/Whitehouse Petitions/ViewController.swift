@@ -37,6 +37,12 @@ class ViewController: UITableViewController {
         return cell
     }
     
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let detailController = DetailViewController()
+        detailController.petition = petitions[indexPath.row]
+        navigationController?.pushViewController(detailController, animated: true)
+    }
+    
     private func parse(json data: Data) {
         let decoder = JSONDecoder()
         
