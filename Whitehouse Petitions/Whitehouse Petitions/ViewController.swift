@@ -8,7 +8,6 @@
 import UIKit
 
 class ViewController: UITableViewController {
-    let navigationControllerID: String = "NavController"
     let tableViewCellIdentifier: String = "Cell"
     var petitions: [Petition] = []
     let urlString: String = "https://www.hackingwithswift.com/samples/petitions-1.json"
