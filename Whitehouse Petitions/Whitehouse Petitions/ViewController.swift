@@ -21,6 +21,9 @@ class ViewController: UITableViewController {
             urlString = "https://www.hackingwithswift.com/samples/petitions-2.json"
         }
         
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .bookmarks, target: self, action: #selector(showCredits))
+        navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(searchKeyword))
+        
         tryParseData()
     }
     
@@ -67,6 +70,32 @@ class ViewController: UITableViewController {
         let alertController = UIAlertController(title: "No Connection", message: "Check your network connection", preferredStyle: .alert)
         alertController.addAction(UIAlertAction(title: "Ok", style: .default))
         present(alertController, animated: true)
+    }
+    
+    @objc private func showCredits() {
+        let alertController = UIAlertController(title: "Credits", message: "Thanks to hacking with swift for the cached api", preferredStyle: .alert)
+        alertController.addAction(UIAlertAction(title: "Thanks", style: .default))
+        present(alertController, animated: true)
+    }
+    
+    @objc private func searchKeyword() {
+        let alertController = UIAlertController(title: "What are you looking for", message: nil, preferredStyle: .alert)
+        alertController.addTextField()
+        
+        let searchFor = UIAlertAction(title: "Search", style: .default) { [weak alertController, weak self] _ in
+            guard let keyword = alertController?.textFields?[0].text else { return }
+            self?.search(for: keyword)
+        }
+        
+        alertController.addAction(searchFor)
+        present(alertController, animated: true) {
+            alertController.textFields?[0].becomeFirstResponder()
+        }
+    }
+    
+    private func search(for keyword: String) {
+        petitions = petitions.filter { $0.title.localizedCaseInsensitiveContains(keyword) != false }
+        tableView.reloadData()
     }
 
 
