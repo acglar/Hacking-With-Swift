@@ -21,6 +21,11 @@ class ViewController: UIViewController {
     let letterButtonHeight: Int = 80
     let letterButtonFontSize: Float = 36
     
+    var activatedButtons: [UIButton] = []
+    var solutions: [String] = []
+    var level: Int = 1
+    var score: Int = 0
+    
     override func loadView() {
         view = UIView()
         view.backgroundColor = .white
@@ -48,7 +53,9 @@ class ViewController: UIViewController {
         view.addSubview(currentAnswer)
         
         let submitButton = createButton(text: "SUBMIT")
+        submitButton.addTarget(self, action: #selector(submitButtonTapped), for: .touchUpInside)
         let clearButton = createButton(text: "CLEAR")
+        clearButton.addTarget(self, action: #selector(clearButtonTapped), for: .touchUpInside)
         
         let buttonsView = UIView()
         buttonsView.translatesAutoresizingMaskIntoConstraints = false
@@ -60,6 +67,7 @@ class ViewController: UIViewController {
                 button.titleLabel?.font = UIFont.systemFont(ofSize: CGFloat(letterButtonFontSize))
                 
                 button.setTitle("temp", for: .normal)
+                button.addTarget(self, action: #selector(letterButtonTapped), for: .touchUpInside)
                 
                 let frame = CGRect(x: x * letterButtonWidth, y: y * letterButtonHeight, width: letterButtonWidth, height: letterButtonHeight)
                 button.frame = frame
@@ -117,7 +125,7 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        loadLevel()
     }
 
     private func createLabel(defaultText text: String) -> UILabel {
@@ -134,6 +142,54 @@ class ViewController: UIViewController {
         button.setTitle(text, for: .normal)
         view.addSubview(button)
         return button
+    }
+    
+    @objc private func letterButtonTapped(_ sender: UIButton) {
+        
+    }
+    
+    @objc private func submitButtonTapped(_ sender: UIButton) {
+        
+    }
+    
+    @objc private func clearButtonTapped(_ sender: UIButton) {
+        
+    }
+    
+    private func loadLevel() {
+        var clues: String = ""
+        var solutions: String = ""
+        var letterBits: [String] = []
+        
+        guard let levelFileURL = Bundle.main.url(forResource: "level\(level)", withExtension: "txt") else { return }
+        guard let levelContents = try? String(contentsOf: levelFileURL) else { return }
+        var lines = levelContents.components(separatedBy: "\n")
+        lines.shuffle()
+        
+        for (index, line) in lines.enumerated() {
+            let parts = line.components(separatedBy: ": ")
+            let answer = parts[0]
+            let clue = parts[1]
+            
+            clues += "\(index + 1)- \(clue)\n"
+            
+            let answerWord = answer.replacingOccurrences(of: "|", with: "")
+            solutions += "\(answerWord.count) letters\n"
+            self.solutions.append(answerWord)
+            
+            let bits = answer.components(separatedBy: "|")
+            letterBits += bits
+        }
+        
+        cluesLabel.text = clues.trimmingCharacters(in: .whitespacesAndNewlines)
+        answersLabel.text = solutions.trimmingCharacters(in: .whitespacesAndNewlines)
+        
+        letterButtons.shuffle()
+        
+        if letterButtons.count != letterBits.count { return }
+        for i in 0..<letterButtons.count {
+            letterButtons[i].setTitle(letterBits[i], for: .normal)
+        }
     }
 
 }
