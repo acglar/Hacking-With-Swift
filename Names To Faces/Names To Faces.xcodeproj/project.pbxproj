@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BD45B77B2A1359EF0070F30D /* PersonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD45B77A2A1359EF0070F30D /* PersonCell.swift */; };
 		BD9737392A115BF6008F9688 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD9737382A115BF6008F9688 /* AppDelegate.swift */; };
 		BD97373B2A115BF6008F9688 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD97373A2A115BF6008F9688 /* SceneDelegate.swift */; };
 		BD97373D2A115BF6008F9688 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD97373C2A115BF6008F9688 /* ViewController.swift */; };
@@ -16,6 +17,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		BD45B77A2A1359EF0070F30D /* PersonCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonCell.swift; sourceTree = "<group>"; };
 		BD9737352A115BF6008F9688 /* Names To Faces.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Names To Faces.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BD9737382A115BF6008F9688 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BD97373A2A115BF6008F9688 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -60,6 +62,7 @@
 				BD97373A2A115BF6008F9688 /* SceneDelegate.swift */,
 				BD97373C2A115BF6008F9688 /* ViewController.swift */,
 				BD97373E2A115BF6008F9688 /* Main.storyboard */,
+				BD45B77A2A1359EF0070F30D /* PersonCell.swift */,
 				BD9737412A115BF7008F9688 /* Assets.xcassets */,
 				BD9737432A115BF7008F9688 /* LaunchScreen.storyboard */,
 				BD9737462A115BF7008F9688 /* Info.plist */,
@@ -140,6 +143,7 @@
 			files = (
 				BD97373D2A115BF6008F9688 /* ViewController.swift in Sources */,
 				BD9737392A115BF6008F9688 /* AppDelegate.swift in Sources */,
+				BD45B77B2A1359EF0070F30D /* PersonCell.swift in Sources */,
 				BD97373B2A115BF6008F9688 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

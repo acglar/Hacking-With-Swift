@@ -7,7 +7,8 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ViewController: UICollectionViewController {
+    let cellIdentifier: String = "PersonCell"
 
     override func viewDidLoad() {
         super.viewDidLoad()
