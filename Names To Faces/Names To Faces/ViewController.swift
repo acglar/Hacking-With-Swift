@@ -12,7 +12,10 @@ class ViewController: UICollectionViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        
+        navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addNewImage))
+    }
+    
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return persons.count
     }
@@ -35,6 +38,15 @@ class ViewController: UICollectionViewController {
         cell.layer.cornerRadius = 7
         
         return cell
+    }
+    
+    @objc private func addNewImage() {
+        let pickerController = UIImagePickerController()
+        pickerController.allowsEditing = true
+        pickerController.delegate = self
+        present(pickerController, animated: true)
+    }
+    
     }
     }
 
