@@ -13,6 +13,29 @@ class ViewController: UICollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return persons.count
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellIdentifier, for: indexPath) as? PersonCell else {
+            fatalError("Couldn't find PersonCell class.")
+        }
+        
+        let person = persons[indexPath.item]
+        
+        cell.nameLabel.text = person.name
+        
+        let imagePath = getDocumentsDirectory().appending(component: person.image)
+        cell.imageView.image = UIImage(contentsOfFile: imagePath.path())
+        
+        cell.imageView.layer.borderColor = UIColor(white: 0, alpha: 0.3).cgColor
+        cell.imageView.layer.borderWidth = 2
+        cell.imageView.layer.cornerRadius = 3
+        cell.layer.cornerRadius = 7
+        
+        return cell
+    }
     }
 
 
