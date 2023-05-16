@@ -7,8 +7,9 @@
 
 import UIKit
 
-class ViewController: UICollectionViewController {
+class ViewController: UICollectionViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     let cellIdentifier: String = "PersonCell"
+    var persons: [Person] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -47,7 +48,25 @@ class ViewController: UICollectionViewController {
         present(pickerController, animated: true)
     }
     
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        guard let image = info[.editedImage] as? UIImage else { return }
+        let imageName = UUID().uuidString
+        let imagePath = getDocumentsDirectory().appending(component: imageName)
+        
+        if let jpegData = image.jpegData(compressionQuality: 0.8) {
+            try? jpegData.write(to: imagePath)
+        }
+        
+        let person = Person(name: "Unknown", image: imageName)
+        persons.append(person)
+        collectionView.reloadData()
+        
+        dismiss(animated: true)
     }
+    
+    private func getDocumentsDirectory() -> URL {
+        let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+        return paths[0]
     }
 
 
