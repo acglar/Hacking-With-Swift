@@ -53,6 +53,10 @@ class ViewController: UICollectionViewController, UIImagePickerControllerDelegat
             self?.collectionView.reloadData()
         })
         alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+        alertController.addAction(UIAlertAction(title: "Delete", style: .default) { [weak self] _ in
+            self?.persons.remove(at: indexPath.item)
+            self?.collectionView.reloadData()
+        })
         
         present(alertController, animated: true)
     }
