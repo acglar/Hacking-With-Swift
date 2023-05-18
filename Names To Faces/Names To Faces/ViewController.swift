@@ -94,20 +94,22 @@ class ViewController: UICollectionViewController, UIImagePickerControllerDelegat
     }
     
     private func save() {
-        if let dataToSave = try? NSKeyedArchiver.archivedData(withRootObject: persons, requiringSecureCoding: false) {
-            let defaults = UserDefaults.standard
-            defaults.set(dataToSave, forKey: "persons")
-        }
+        let encoder = JSONEncoder()
+        guard let dataToSave = try? encoder.encode(persons) else { return }
+        let defaults = UserDefaults.standard
+        defaults.set(dataToSave, forKey: "persons")
+        
     }
     
     private func loadData() {
         let defaults = UserDefaults.standard
         guard let data = defaults.object(forKey: "persons") as? Data else { return }
-        if let unarchiever = try? NSKeyedUnarchiver.init(forReadingFrom: data) {
-            unarchiever.requiresSecureCoding = false
-            if let savedData = unarchiever.decodeObject(forKey: NSKeyedArchiveRootObjectKey) as? [Person] {
-                persons = savedData
-            }
+        let decoder = JSONDecoder()
+        
+        do {
+            persons = try decoder.decode([Person].self, from: data)
+        } catch {
+            print("failed to retrieve data")
         }
     }
 
