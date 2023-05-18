@@ -13,6 +13,7 @@ class ViewController: UICollectionViewController, UIImagePickerControllerDelegat
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        loadData()
         
         navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addNewImage))
     }
@@ -50,11 +51,13 @@ class ViewController: UICollectionViewController, UIImagePickerControllerDelegat
         alertController.addAction(UIAlertAction(title: "Ok", style: .default) { [weak self, weak alertController] _ in
             guard let name = alertController?.textFields?[0].text else { return }
             person.name = name
+            self?.save()
             self?.collectionView.reloadData()
         })
         alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel))
         alertController.addAction(UIAlertAction(title: "Delete", style: .default) { [weak self] _ in
             self?.persons.remove(at: indexPath.item)
+            self?.save()
             self?.collectionView.reloadData()
         })
         
@@ -79,6 +82,7 @@ class ViewController: UICollectionViewController, UIImagePickerControllerDelegat
         
         let person = Person(name: "Unknown", image: imageName)
         persons.append(person)
+        save()
         collectionView.reloadData()
         
         dismiss(animated: true)
@@ -87,6 +91,24 @@ class ViewController: UICollectionViewController, UIImagePickerControllerDelegat
     private func getDocumentsDirectory() -> URL {
         let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
         return paths[0]
+    }
+    
+    private func save() {
+        if let dataToSave = try? NSKeyedArchiver.archivedData(withRootObject: persons, requiringSecureCoding: false) {
+            let defaults = UserDefaults.standard
+            defaults.set(dataToSave, forKey: "persons")
+        }
+    }
+    
+    private func loadData() {
+        let defaults = UserDefaults.standard
+        guard let data = defaults.object(forKey: "persons") as? Data else { return }
+        if let unarchiever = try? NSKeyedUnarchiver.init(forReadingFrom: data) {
+            unarchiever.requiresSecureCoding = false
+            if let savedData = unarchiever.decodeObject(forKey: NSKeyedArchiveRootObjectKey) as? [Person] {
+                persons = savedData
+            }
+        }
     }
 
 
