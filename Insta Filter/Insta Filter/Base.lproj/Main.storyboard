@@ -47,6 +47,9 @@
                                 </constraints>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="Change Filter"/>
+                                <connections>
+                                    <action selector="onChangeFilterButtonClick:" destination="BYZ-38-t0r" eventType="touchUpInside" id="zsz-bv-xB3"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7qb-cx-afR">
                                 <rect key="frame" x="296" y="774" width="80" height="44"/>
@@ -55,9 +58,15 @@
                                 </constraints>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="Save"/>
+                                <connections>
+                                    <action selector="onSaveButtonClick:" destination="BYZ-38-t0r" eventType="touchUpInside" id="iDD-hc-OMi"/>
+                                </connections>
                             </button>
                             <slider opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="ZbD-39-Mfa">
                                 <rect key="frame" x="87" y="733" width="292" height="30"/>
+                                <connections>
+                                    <action selector="onIntensityValueChanged:" destination="BYZ-38-t0r" eventType="valueChanged" id="jbp-XP-fvA"/>
+                                </connections>
                             </slider>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
@@ -80,6 +89,10 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="LUJ-Qe-Oe6"/>
+                    <connections>
+                        <outlet property="imageView" destination="I22-hT-ItA" id="P8v-aC-Go3"/>
+                        <outlet property="intensitySlider" destination="ZbD-39-Mfa" id="XJP-D0-XsF"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
