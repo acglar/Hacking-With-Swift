@@ -26,7 +26,24 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         currentFilter = CIFilter(name: "CISepiaTone")
     }
 
-    @IBAction func onChangeFilterButtonClick(_ sender: Any) {
+    @IBAction func onChangeFilterButtonClick(_ sender: UIButton) {
+        let alertController = UIAlertController(title: "Choose Filter", message: nil, preferredStyle: .actionSheet)
+        
+        alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+        alertController.addAction(createAlertActionForFilter("CIBumpDistortion"))
+        alertController.addAction(createAlertActionForFilter("CIGaussianBlur"))
+        alertController.addAction(createAlertActionForFilter("CIPixellate"))
+        alertController.addAction(createAlertActionForFilter("CISepiaTone"))
+        alertController.addAction(createAlertActionForFilter("CITwirlDistortion"))
+        alertController.addAction(createAlertActionForFilter("CIUnsharpMask"))
+        alertController.addAction(createAlertActionForFilter("CIVignette"))
+        
+        if let popOverController = alertController.popoverPresentationController {
+            popOverController.sourceView = sender
+            popOverController.sourceRect = sender.bounds
+        }
+        
+        present(alertController, animated: true)
     }
     
     @IBAction func onSaveButtonClick(_ sender: Any) {
@@ -49,6 +66,11 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         picker.delegate = self
         present(picker, animated: true)
     }
+    
+    private func createAlertActionForFilter(_ filterName: String) -> UIAlertAction {
+        return UIAlertAction(title: filterName, style: .default, handler: setFilter)
+    }
+    
     private func setFilter(action: UIAlertAction) {
         if currentImage == nil { return }
         guard let filterName = action.title else { return }
