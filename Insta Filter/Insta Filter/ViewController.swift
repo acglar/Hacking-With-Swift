@@ -14,6 +14,9 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        
+        title = "Insta Filter"
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(importImage))
     }
 
     @IBAction func onChangeFilterButtonClick(_ sender: Any) {
@@ -23,6 +26,20 @@ class ViewController: UIViewController {
     }
     
     @IBAction func onIntensityValueChanged(_ sender: Any) {
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        guard let image = info[.editedImage] as? UIImage else { return }
+        currentImage = image
+        initFiltering()
+        dismiss(animated: true)
+    }
+    
+    @objc private func importImage() {
+        let picker = UIImagePickerController()
+        picker.allowsEditing = true
+        picker.delegate = self
+        present(picker, animated: true)
+    }
     }
 }
 
