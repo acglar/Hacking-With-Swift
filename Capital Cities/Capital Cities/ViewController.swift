@@ -6,12 +6,32 @@
 //
 
 import UIKit
+import MapKit
 
-class ViewController: UIViewController {
-
+class ViewController: UIViewController, MKMapViewDelegate {
+    @IBOutlet var mapView: MKMapView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        mapView.delegate = self
+        
+        addCapitalsToMap()
+    }
+    
+    private func addCapitalsToMap() {
+        let istanbul = Capital(title: "Istanbul", coordinate: CLLocationCoordinate2D(latitude: 41.015137, longitude: 28.979530), info: "What a wonderful city")
+        
+        let london = Capital(title: "London", coordinate: CLLocationCoordinate2D(latitude: 51.507222, longitude: -0.1275), info: "Capital of England")
+        
+        let oslo = Capital(title: "Oslo", coordinate: CLLocationCoordinate2D(latitude: 59.95, longitude: 10.75), info: "Capital of Norway")
+        
+        let paris = Capital(title: "Paris", coordinate: CLLocationCoordinate2D(latitude: 48.8567, longitude: 2.3508), info: "Capital of France")
+        
+        let rome = Capital(title: "Rome", coordinate: CLLocationCoordinate2D(latitude: 41.9, longitude: 12.5), info: "Capital of Italy")
+        
+        let washington = Capital(title: "Washington DC", coordinate: CLLocationCoordinate2D(latitude: 38.895111, longitude: -77.036667), info: "Capital of USA")
+        
+        mapView.addAnnotations([istanbul, london, oslo, paris, rome, washington])
     }
 
 
