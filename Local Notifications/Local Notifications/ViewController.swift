@@ -8,7 +8,7 @@
 import UIKit
 import UserNotifications
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, UNUserNotificationCenterDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,6 +30,8 @@ class ViewController: UIViewController {
     }
     
     @objc func scheduleLocal() {
+        registerCategories()
+        
         let center = UNUserNotificationCenter.current()
         center.removeAllPendingNotificationRequests()
         
@@ -50,6 +52,34 @@ class ViewController: UIViewController {
         let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
         center.add(request)
         
+    }
+    
+    private func registerCategories() {
+        let center = UNUserNotificationCenter.current()
+        center.delegate = self
+        
+        let show = UNNotificationAction(identifier: "show", title: "Tell me more...", options: .foreground)
+        let category = UNNotificationCategory(identifier: "alarm", actions: [show], intentIdentifiers: [], options: [])
+        
+        center.setNotificationCategories([category])
+    }
+    
+    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+        let userInfo = response.notification.request.content.userInfo
+        
+        if let customData = userInfo["customData"] as? String {
+            
+            switch response.actionIdentifier {
+            case UNNotificationDefaultActionIdentifier:
+                // on swipe on the notification
+                print("Default action")
+            case "show":
+                // user pressed custom button
+                print("Tell me more button pressed")
+            default:
+                break
+            }
+        }
     }
 
 
