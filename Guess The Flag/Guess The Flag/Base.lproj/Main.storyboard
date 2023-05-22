@@ -18,6 +18,9 @@
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2eO-zD-MKe">
                                 <rect key="frame" x="96.666666666666686" y="100" width="200" height="100"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="2eO-zD-MKe" secondAttribute="height" multiplier="2:1" id="y9h-CF-c5K"/>
+                                </constraints>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                 <state key="normal" image="us"/>
                                 <connections>
@@ -26,6 +29,9 @@
                             </button>
                             <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dhV-K2-uXF">
                                 <rect key="frame" x="96.666666666666686" y="230" width="200" height="100"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="dhV-K2-uXF" secondAttribute="height" multiplier="2:1" id="ELb-12-JP4"/>
+                                </constraints>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                 <state key="normal" image="us"/>
                                 <connections>
@@ -34,6 +40,9 @@
                             </button>
                             <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OqW-64-Sy6">
                                 <rect key="frame" x="96.666666666666686" y="360" width="200" height="100"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="OqW-64-Sy6" secondAttribute="height" multiplier="2:1" id="ssY-kx-3w9"/>
+                                </constraints>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                 <state key="normal" image="us"/>
                                 <connections>
@@ -44,12 +53,15 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="OqW-64-Sy6" secondAttribute="bottom" constant="20" id="ZQm-Ta-DkA"/>
                             <constraint firstItem="2eO-zD-MKe" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="Zpy-F2-lqc"/>
+                            <constraint firstItem="dhV-K2-uXF" firstAttribute="height" secondItem="2eO-zD-MKe" secondAttribute="height" id="av7-3y-FY7"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="top" secondItem="2eO-zD-MKe" secondAttribute="top" constant="3" id="dhp-8X-bgk"/>
                             <constraint firstItem="dhV-K2-uXF" firstAttribute="top" secondItem="2eO-zD-MKe" secondAttribute="bottom" constant="30" id="loq-kn-Qf7"/>
                             <constraint firstItem="dhV-K2-uXF" firstAttribute="centerX" secondItem="2eO-zD-MKe" secondAttribute="centerX" id="vjN-kj-oQN"/>
                             <constraint firstItem="OqW-64-Sy6" firstAttribute="centerX" secondItem="dhV-K2-uXF" secondAttribute="centerX" id="vt5-qp-vfB"/>
                             <constraint firstItem="OqW-64-Sy6" firstAttribute="top" secondItem="dhV-K2-uXF" secondAttribute="bottom" constant="30" id="weT-QW-y3T"/>
+                            <constraint firstItem="OqW-64-Sy6" firstAttribute="height" secondItem="dhV-K2-uXF" secondAttribute="height" id="yUq-a5-YxB"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="75M-5O-0cj"/>
